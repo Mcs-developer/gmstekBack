@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Models\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Client.cs" />
+    <Compile Remove="Controllers\ValuesController.cs" />
+    <Compile Remove="Logic\PolicyLogic.cs" />
+    <Compile Remove="Controllers\PolicyController.cs" />
+    <Compile Remove="Migrations\20190119180541_InitiaL.Designer.cs" />
+    <Compile Remove="Migrations\20190119180541_InitiaL.cs" />
+    <Compile Remove="Migrations\20190119190442_Added_user_system.Designer.cs" />
+    <Compile Remove="Migrations\20190119190442_Added_user_system.cs" />
+  </ItemGroup>
+</Project>
