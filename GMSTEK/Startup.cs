@@ -56,8 +56,9 @@ namespace GMSTEK
                          ClockSkew = TimeSpan.Zero
                      });
 
-            //services.AddScoped<IRepository<Policy>, Repository<Policy>>();
-            //services.AddScoped<IRepository<RiskType>, Repository<RiskType>>();
+            services.AddScoped<IRepository<Invoice>, Repository<Invoice>>();
+            services.AddScoped<IRepository<Item>, Repository<Item>>();
+            services.AddScoped<IRepository<InvoiceItem>, Repository<InvoiceItem>>();
 
             services.AddMvc().AddJsonOptions(ConfigureJson);
             services.AddCors();

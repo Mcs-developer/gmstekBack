@@ -7,7 +7,7 @@ using GMSTEK.Models;
 
 namespace GMSTEK.Data
 {
-    public class Repository<T> : IRepository<T> where T : Entity, new()
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ApplicationDBContext context;
 
@@ -28,14 +28,14 @@ namespace GMSTEK.Data
             context.SaveChanges();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> FindAll()
         {
-            return context.Set<T>().ToList();
+            return context.Set<T>();
         }
 
-        public T GetById(int id)
+        public IEnumerable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return context.Set<T>().Where(r => r.Id == id).FirstOrDefault();
+            return context.Set<T>().Where(expression);
         }
 
         public void Update(T entity)
