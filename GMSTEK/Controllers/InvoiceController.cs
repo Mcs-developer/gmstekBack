@@ -17,9 +17,10 @@ namespace GMSTEK.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class InvoiceController : Controller
     {
-        private IRepository<Invoice> _invoiceRepository;
+        private IInvoiceRepository _invoiceRepository;
         private IRepository<Item> _itemRepository;
-        public InvoiceController(IRepository<Invoice> invoiceRepository,
+
+        public InvoiceController(IInvoiceRepository invoiceRepository,
                                  IRepository<Item> itemRepository)
         {
             _invoiceRepository = invoiceRepository;
@@ -36,7 +37,7 @@ namespace GMSTEK.Controllers
         [HttpGet("{id}", Name = "invoiceCreated")]
         public IActionResult Get(int id)
         {
-            var invoice = _invoiceRepository.FindByCondition(x => x.InvoiceId == id);
+            var invoice = _invoiceRepository.GetById(id);
 
             if (invoice == null)
             {

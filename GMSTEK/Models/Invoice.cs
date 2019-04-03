@@ -13,7 +13,6 @@ namespace GMSTEK.Models
         [Required]
         public DateTime InvoiceDate { get; set; }
 
-        [JsonIgnore]
         public ICollection<InvoiceItem> InvoiceItems { get; set; }
     }
 }

@@ -59,6 +59,7 @@ namespace GMSTEK
             services.AddScoped<IRepository<Invoice>, Repository<Invoice>>();
             services.AddScoped<IRepository<Item>, Repository<Item>>();
             services.AddScoped<IRepository<InvoiceItem>, Repository<InvoiceItem>>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
             services.AddMvc().AddJsonOptions(ConfigureJson);
             services.AddCors();
