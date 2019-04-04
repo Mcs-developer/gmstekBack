@@ -84,8 +84,16 @@ namespace GMSTEK.Controllers
 
         // DELETE api/invoice/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var invoice = _invoiceRepository.FindByCondition(x => x.InvoiceId == id).FirstOrDefault();
+            if(invoice == null)
+            {
+                return NotFound();
+            }
+
+            _invoiceRepository.Delete(invoice);
+            return Ok(invoice);
         }
     }
 }
