@@ -19,7 +19,7 @@ namespace GMSTEK.Controllers
     {
         private IInvoiceRepository _invoiceRepository;
         private IRepository<Item> _itemRepository;
-
+        
         public InvoiceController(IInvoiceRepository invoiceRepository,
                                  IRepository<Item> itemRepository)
         {
@@ -78,8 +78,25 @@ namespace GMSTEK.Controllers
 
         // PUT api/invoice/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]ItemDTO[] items)
         {
+            var invoiceItem = _invoiceRepository.GetById(id).FirstOrDefault();
+
+            if(invoiceItem == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var item in items)
+            {
+                var itemTmp = invoiceItem.InvoiceItems.FirstOrDefault(x => x.Item.Code == item.Code);
+                itemTmp.Quantity = item.Quantity;
+                itemTmp.UnitValue = item.UnitValue;
+            }
+
+            _invoiceRepository.Update(invoiceItem);
+            return new CreatedAtRouteResult("invoiceCreated", new { id = invoiceItem.InvoiceId }, invoiceItem);
+
         }
 
         // DELETE api/invoice/5
