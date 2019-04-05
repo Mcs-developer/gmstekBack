@@ -37,7 +37,7 @@ namespace GMSTEK.Controllers
         [HttpGet("{id}", Name = "invoiceCreated")]
         public IActionResult Get(int id)
         {
-            var invoice = _invoiceRepository.GetById(id);
+            var invoice = _invoiceRepository.GetById(id).FirstOrDefault();
 
             if (invoice == null)
             {
